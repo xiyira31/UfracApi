@@ -1,0 +1,11 @@
+{
+    "username": "gate",
+    "password": "gateTaskApp_133483",
+    "database": "wellfracoptisys",
+    "host": "39.99.204.86",
+    "dialect": "mysql",
+    "dialectOptions": { "decimalNumbers": true },
+    "define": {
+      "timestamps": false
+    }
+}
