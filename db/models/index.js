@@ -25,6 +25,11 @@ module.exports = (() => {
         }
       });
 
+      models["proc_well_quatity"].hasMany(models["proc_well_quatity_detail"], {
+        foreignKey: 'well_quatity',
+        as: 'details'
+      });
+
     models.sequelize = sequelize;
   }
 
