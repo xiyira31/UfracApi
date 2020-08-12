@@ -12,13 +12,7 @@ module.exports = function(sequelize, DataTypes) {
     user: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      comment: '外键User',
-      references: {
-        model: {
-          tableName: 'sys_login',
-        },
-        key: 'id_base_login'
-      }
+      comment: '用户'
     },
     well: {
       type: DataTypes.INTEGER(11),
@@ -29,6 +23,17 @@ module.exports = function(sequelize, DataTypes) {
           tableName: 'well_info',
         },
         key: 'id_well_info'
+      }
+    },
+    well_quatity: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '外键到proc_well_quatity',
+      references: {
+        model: {
+          tableName: 'proc_well_quatity',
+        },
+        key: 'id'
       }
     },
     locked: {
@@ -62,14 +67,13 @@ module.exports = function(sequelize, DataTypes) {
     },
     deleted_at: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: "0000-00-00 00:00:00",
+      allowNull: true,
       comment: '删除于'
     },
     create_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: "0000-00-00 00:00:00",
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
       comment: '创建于'
     }
   }, {
