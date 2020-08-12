@@ -1,5 +1,5 @@
 const {Sequelize} = require('sequelize');
-const db = require('../configs/database');
+const db = require('../configs/database').web;
 
 let connection = null;
 
