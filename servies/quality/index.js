@@ -1,61 +1,27 @@
-const Parser = require('expr-eval').Parser;
-const models  = require('../../db/models');
-const utils = require('../../utils/utils');
-const code = require('../../enums/RESPONSE_CODE');
-const {Sequelize} = require('sequelize');
+const customParser = require('./custom');
+const aceParser = require('./custom');
+const FUNCTION_CODE = require('../../enums/FUNCTION_CODE');
 
-async function qualityServices (request) {
-  return await exprPraser(request.well_info_id, request.function_id, request.well_plan_id);
-}
+class QualityServices{
 
-async function exprPraser(wellInfoId, quatityFuncId, wellPlanId){
-  const func = await models.proc_quatity_function.findOne({
-    where: {
-      id: quatityFuncId
-    }
-  });
-  if(func == null){
-    throw '没有对应方法:';
-  }
-  const equation = func.equation;
-  let parser = new Parser();
-  let expr = parser.parse(equation);
-  let vars = expr.variables();
-  vars.push('md'); //需要填入MD
-  let varsVals = await models.well_formation.findAll({
-    attributes: vars,
-    where: {
-      well: wellInfoId
-    }
-  });
-  
-  try {
-    //console.log(sequelize);
-    const result = await models.sequelize.transaction(async (t) => {
-  
-      let well_quatity = await models.proc_well_quatity.create({
-        name:'',
-        wellplan: wellPlanId,
-        quatityfunction: quatityFuncId
-      }, { transaction: t });
-      let qualityResults = [];
-      varsVals.forEach(vals => {
-        let result = expr.evaluate(vals);
-        let qualityResult = {
-          md: vals.md,
-          value: result,
-          well_quatity: well_quatity.id
-        };
-        qualityResults.push(qualityResult);
-      });
-      await models.proc_well_quatity_detail.bulkCreate(qualityResults, { transaction: t });  
-    });
-  
-  } catch (error) {
-    throw error;
+  constructor(request) {
+    this._wellInfoId = request.well_info_id;
+    this._functionId = request.function_id;
+    this._wellPlanId = request.well_plan_id;
+    this._functionType = request.function_type;
   }
 
-  return utils.responseString(code.SUCCESS, "成功！");
+  async exec() {
+    if(this._functionType === FUNCTION_CODE.ACE) {
+      return await aceParser();
+    }
+    else if(this._functionType === FUNCTION_CODE.CUSTOM){
+      return await customParser(this._wellInfoId, this._functionId, this._wellPlanId);
+    }
+    else{
+      throw '没有这种functionType:' + this._functionType;
+    }
+  }
 }
 
-module.exports = qualityServices;
+module.exports = QualityServices;
