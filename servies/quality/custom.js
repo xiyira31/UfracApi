@@ -167,4 +167,4 @@ async function praserNoTransaction(wellInfoId, quatityFuncId, wellPlanId) {
   return utils.responseString(code.SUCCESS, "成功！");
 }
 
-module.exports = praserNoTransaction;
+module.exports = praser;
