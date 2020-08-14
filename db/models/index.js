@@ -30,6 +30,14 @@ module.exports = (() => {
         as: 'details'
       });
 
+      models["proc_well_quatity"].belongsTo(
+        models["proc_well_plan"],
+        {
+          foreignKey: 'well_plan',
+          as: "wellPlan",
+        }
+      );
+
     models.sequelize = sequelize;
   }
 
