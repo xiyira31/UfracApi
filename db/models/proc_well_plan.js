@@ -25,17 +25,6 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id_well_info'
       }
     },
-    well_quatity: {
-      type: DataTypes.INTEGER(11),
-      allowNull: true,
-      comment: '外键到proc_well_quatity',
-      references: {
-        model: {
-          tableName: 'proc_well_quatity',
-        },
-        key: 'id'
-      }
-    },
     locked: {
       type: DataTypes.INTEGER(1),
       allowNull: true,
