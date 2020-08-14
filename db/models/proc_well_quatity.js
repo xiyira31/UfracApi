@@ -13,6 +13,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       comment: '名称'
     },
+    stats: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '任务状态0=未计算，1=计算中，2=完成'
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: true,
@@ -33,6 +38,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         key: 'id'
       }
+    },
+    function_type: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '自定义=0，ACE法=1，DPEI=2'
     }
   }, {
     sequelize,
