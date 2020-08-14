@@ -1,0 +1,21 @@
+{
+  "$id": "https://localhost:3000/schema/quality.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "储层质量评价request模板",
+  "type": "object",
+  "properties": {
+    "well_info_id": {
+      "type": "integer"
+    },
+    "well_plan_id": {
+      "type": "integer"
+    },
+    "function_id": {
+      "type": "integer"
+    },
+    "function_type": {
+      "type": "integer"
+    }
+  },
+  "required": [ "well_info_id", "well_plan_id", "function_id", "function_type" ]
+}

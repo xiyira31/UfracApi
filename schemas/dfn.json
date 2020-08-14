@@ -1,0 +1,36 @@
+{
+  "$id": "https://localhost:3000/schema/dfn.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "天然裂缝生成request模板",
+  "type": "object",
+  "properties": {
+    "well_info_id": {
+      "type": "integer"
+    },
+    "start": {
+      "type": "number"
+    },
+    "end": {
+      "type": "number"
+    },
+    "avg_length": {
+      "type": "number"
+    },
+    "density": {
+      "type": "number"
+    },
+    "angle": {
+      "type": "number"
+    },
+    "y_offset": {
+      "type": "number"
+    },
+    "angle_offset": {
+      "type": "number"
+    },
+    "min_length": {
+      "type": "number"
+    }
+  },
+  "required": [ "well_info_id", "start", "end", "avg_length", "density", "angle", "y_offset", "angle_offset", "min_length" ]
+}
