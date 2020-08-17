@@ -24,6 +24,9 @@ async function praser(quatity, service) {
       well: quatity.wellPlan.well,
     },
   });
+  if(varsVals.length === 0) {
+    throw '测井数据为空，无法计算储层质量！';
+  }
   service.caling();
   await models.sequelize.transaction(async (t) => {
     service.removePre(t);
