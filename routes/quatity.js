@@ -6,8 +6,6 @@ const TASK_CODE = require('../enums/TASK_CODE');
 const utils = require('../utils/utils');
 let QualityServices = require('../servies/quality');
 
-var Ajv = require('ajv');
-
 const qualitySchema = require('../schemas/quality.json');
 
 router.get('/:id',async function(req, res) {  
