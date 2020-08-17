@@ -3,6 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('proc_well_dfn_detail', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true

@@ -3,6 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('proc_well_dfn', {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
@@ -62,6 +63,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true,
       comment: '最小裂缝长度(m)'
+    },
+    stats: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '任务状态0=未计算，1=计算中，2=完成'
     }
   }, {
     sequelize,
