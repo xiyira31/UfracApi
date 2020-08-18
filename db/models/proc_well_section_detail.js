@@ -6,13 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: {
-          tableName: 'proc_well_section',
-        },
-        key: 'id'
-      }
+      primaryKey: true
     },
     wellsection: {
       type: DataTypes.INTEGER(11),

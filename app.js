@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var taskRouter = require('./routes/task');
 var quatityRouter = require('./routes/quatity');
 var dfnRouter = require('./routes/dfn');
+var sectionRouter = require('./routes/section');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/task', taskRouter);
 app.use('/quatity', quatityRouter);
 app.use('/dfn', dfnRouter);
+app.use('/section', sectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

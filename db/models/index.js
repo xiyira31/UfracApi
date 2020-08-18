@@ -38,6 +38,11 @@ module.exports = (() => {
         }
       );
 
+      models["proc_well_section_detail"].hasMany(models["proc_well_section_cluster"], {
+        foreignKey: 'wellsectiondetail',
+        as: 'clusters'
+      });
+
     models.sequelize = sequelize;
   }
 

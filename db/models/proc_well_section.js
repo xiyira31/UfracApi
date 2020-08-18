@@ -78,6 +78,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         key: 'id'
       }
+    },
+    stats: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '任务状态0=未计算，1=计算中，2=完成'
     }
   }, {
     sequelize,
