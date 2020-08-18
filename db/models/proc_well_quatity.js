@@ -39,6 +39,17 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    well_plan: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+      comment: '外链至proc_well_plan',
+      references: {
+        model: {
+          tableName: 'proc_well_plan',
+        },
+        key: 'id'
+      }
+    },
     function_type: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
