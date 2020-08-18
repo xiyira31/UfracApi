@@ -196,6 +196,9 @@ class SectionServices {
         max = value;
         maxIndex = index;
       }
+      if(md < start){
+        break;
+      }
     }
     if(maxIndex < 0) {
       return (start + end) / 2
