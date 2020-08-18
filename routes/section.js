@@ -21,18 +21,18 @@ router.get('/:id',async function(req, res) {
     res.json(utils.responseString(RESPONSE_CODE.ERROR, '没有找到对应id记录'));
     return;
   }
-  // if(wellSection.stats === TASK_CODE.CALING) {
-  //   res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务正在计算！'));
-  //   return;
-  // }
-  // if(wellSection.stats === TASK_CODE.FINISHED) {
-  //   res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务已经计算完成！'));
-  //   return;
-  // }
-  // if(wellSection.stats === TASK_CODE.ERROR) {
-  //   res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务发生错误！'));
-  //   return;
-  // }
+  if(wellSection.stats === TASK_CODE.CALING) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务正在计算！'));
+    return;
+  }
+  if(wellSection.stats === TASK_CODE.FINISHED) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务已经计算完成！'));
+    return;
+  }
+  if(wellSection.stats === TASK_CODE.ERROR) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务发生错误！'));
+    return;
+  }
   let response = {};
   let sectionServices = new SectionServices(wellSection);
   try{
