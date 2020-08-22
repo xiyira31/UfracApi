@@ -64,15 +64,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     fracture_stats: {
-      type: DataTypes.ENUM('未计算','正在计算','计算完成','错误'),
+      type: DataTypes.INTEGER(11),
       allowNull: true,
-      defaultValue: "未计算",
       comment: '裂缝预测计算状态'
     },
     production_stats: {
-      type: DataTypes.ENUM('未计算','正在计算','计算完成','错误'),
+      type: DataTypes.INTEGER(11),
       allowNull: true,
-      defaultValue: "未计算",
       comment: '产能预测计算状态'
     },
     created_at: {
