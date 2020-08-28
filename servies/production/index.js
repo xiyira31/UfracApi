@@ -103,7 +103,7 @@ class PlanDetailServices {
         transaction: t
       });
       this._planDetail.production_stats = 2;
-      await this._planDetail.production_stats.save();
+      await this._planDetail.save();
     })
     
   }
