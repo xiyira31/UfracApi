@@ -3,6 +3,7 @@ const TASK_CODE = require('../../enums/TASK_CODE');
 const RESPONSE_CODE = require('../../enums/RESPONSE_CODE');
 const utils = require('../../utils/utils');
 const FractureService = require('../fracture');
+const ProductionService = require('../production');
 
 class PlanDetailServices {
   constructor(planDetail) {
@@ -21,9 +22,13 @@ class PlanDetailServices {
   }
 
   async productionExec() {
-    await this.caling('fracture_stats');    
-    
-    await this.finished('fracture_stats');
+    let fracture = await models.proc_plan_detail_production.findOne({
+      where: {
+        well_plan_detail: this._planDetail.id
+      }
+    });
+    let productionService = new ProductionService(fracture, this._planDetail);
+    await productionService.exec();
     return utils.responseString(RESPONSE_CODE.SUCCESS, "成功！");
   }
 

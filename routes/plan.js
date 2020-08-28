@@ -28,7 +28,7 @@ router.get('/:id',async function(req, res) {
       fractureRoute(planDetail, res);
       break;
     case CALCULATE_CODE.PRODUCTION:
-
+      productionRoute(planDetail, res);
       break;
     default:
       res.json(utils.responseString(RESPONSE_CODE.ERROR, '未知的计算类型'));
@@ -36,6 +36,34 @@ router.get('/:id',async function(req, res) {
   }
 
 });
+
+async function productionRoute(planDetail, res) {
+  if(planDetail.production_stats === TASK_CODE.CALING) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务正在计算！'));
+    return;
+  }
+  if(planDetail.production_stats === TASK_CODE.FINISHED) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务已经计算完成！'));
+    return;
+  }
+  if(planDetail.production_stats === TASK_CODE.ERROR) {
+    res.json(utils.responseString(RESPONSE_CODE.ERROR, '任务发生错误！'));
+    return;
+  }
+  let response = {};
+  let planDetailServices = new PlanDetailServices(planDetail);
+  try{
+    response = await planDetailServices.productionExec(planDetail);
+  }
+  catch(error){
+    console.log(error);
+    response = utils.responseString(RESPONSE_CODE.ERROR, JSON.stringify(error));
+    planDetailServices.error();
+    res.json(response);
+    return;
+  }
+  res.json(response);
+}
 
 async function fractureRoute(planDetail, res) {
   if(planDetail.fracture_stats === TASK_CODE.CALING) {
