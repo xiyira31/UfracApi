@@ -305,36 +305,6 @@ class PlanDetailServices {
     return doubleResults;
   }
 
-  initArgs() {
-    this._matrix_porosity = this.matrix_porosity; //nD
-    this._matrix_permeability = this.min_stress;
-    this._E = this._youngs * 10e6;
-    this._nu = this._poisson_ratio;
-    args.push(this._filedir + "\\");
-    console.log("python2" + args.join(" "));
-    var process = spawnSync("python2", args);
-    process.fracture = this;
-    process.stdout.on("data", async function (data) {
-      console.log(process.fracture);
-      if (data) {
-        await process.fracture.saveInfo();
-      }
-    });
-    process.stderr.on("data", function (data) {
-      console.log(data.toString("utf8"));
-    });
-    process.on("close", function (code) {
-      console.log("close code:" + code);
-    });
-  }
-
-  async saveInfo() {
-    this.calFracInfo();
-    this._planDetail.fracture_stats = TASK_CODE.FINISHED;
-    await this._planDetail.save();
-    await this._fracutre.save();
-  }
-
   async caling() {
     await this.changeTaskStats(TASK_CODE.CALING);
   }
@@ -348,7 +318,7 @@ class PlanDetailServices {
   }
 
   async changeTaskStats(code) {
-    this._planDetail.fracture_stats = code;
+    this._planDetail.production_stats = code;
     await this._planDetail.save();
   }
 }
