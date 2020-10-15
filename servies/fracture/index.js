@@ -111,7 +111,7 @@ class PlanDetailServices {
     this._sigma_H = this._max_stress * 10e6;
     this._sigma_h = this._min_stress * 10e6;
     this._E = this._youngs * 10e6;
-    this._nu = this._poisson_ratio;
+    this._nu = this._poisson_ratio / 100; //百分比显示
     this._Kfluid = this._k;
     this._Nfluid = this._n;
     this._CLoss = this._closs;
